@@ -1,1 +1,1 @@
-# python_brick_breaker
+# Denis Dupľák

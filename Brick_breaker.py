@@ -1,4 +1,4 @@
-import random, sys, time,os
+import random, sys, time,os,copy
 from levels import level_1,level_2,level_3
 from threading import Thread
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -273,7 +273,7 @@ def update():
             game_state = "playing"
             music.play('background')
             music.set_volume(0.25)
-            bricks = [b for b in level_cache[selected_level]]
+            bricks = [copy.copy(b) for b in level_cache[selected_level]]
             input_cooldown = 10
             return
     if game_over == True and input_cooldown == 0:
@@ -297,12 +297,7 @@ def update():
             ball.through = False
             paddle.x = WIDTH / 2
             paddle.image = 'paddle'
-            if selected_level == 1:
-                bricks = level_1()
-            elif selected_level == 2:
-                bricks = level_2()
-            elif selected_level == 3:
-                bricks = level_3()
+            bricks = [copy.copy(b) for b in level_cache[selected_level]]
             input_cooldown = 10
         if keyboard.x:
             game_state = "level_select"
